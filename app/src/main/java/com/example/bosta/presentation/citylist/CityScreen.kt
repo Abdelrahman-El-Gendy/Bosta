@@ -36,13 +36,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bosta.model.Data
 import com.example.bosta.model.District
+import com.example.bosta.model.remote.CityScreenState
 import com.example.bosta.ui.theme.BostaTheme
 
 @Composable
 fun CityScreen(
-    viewModel: CityViewModel = hiltViewModel()
+    viewModel: CityViewModel = hiltViewModel(),
+    state: CityScreenState
 ) {
-    val state by viewModel.state.collectAsState()
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -143,6 +144,9 @@ fun DistrictItem(district: District) {
 @Composable
 private fun CityScreenPreview() {
     BostaTheme {
-        CityScreen()
+        CityScreen(
+            viewModel = TODO(),
+            state = TODO()
+        )
     }
 }
