@@ -5,15 +5,20 @@ import androidx.lifecycle.viewModelScope
 import com.example.bosta.model.CityRepository
 import com.example.bosta.model.CityRepositoryImpl
 import com.example.bosta.model.remote.CityScreenState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class CityViewModel : ViewModel() {
-    private val repository: CityRepository = CityRepositoryImpl()
+@HiltViewModel
+class CityViewModel @Inject constructor(
+    private val repository: CityRepository
+) : ViewModel() {
+
     private val _state = MutableStateFlow(
         CityScreenState(
             cities = emptyList(),
