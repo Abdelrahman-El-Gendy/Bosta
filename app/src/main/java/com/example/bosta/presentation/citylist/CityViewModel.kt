@@ -47,7 +47,7 @@ class CityViewModel @Inject constructor(
                 .onFailure { error ->
                     _state.update {
                         it.copy(
-                            error = error,
+                            error = error.toString(),
                             isLoading = false
                         )
                     }

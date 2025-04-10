@@ -30,10 +30,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.bosta.SemanticsDescription
 import com.example.bosta.model.Data
 import com.example.bosta.model.District
 import com.example.bosta.model.remote.CityScreenState
@@ -44,6 +47,7 @@ fun CityScreen(
     viewModel: CityViewModel = hiltViewModel(),
     state: CityScreenState
 ) {
+//    val state = state ?:viewModel.state.collectAsState().value
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -55,7 +59,9 @@ fun CityScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    CircularProgressIndicator()
+                    CircularProgressIndicator(modifier = Modifier.semantics {
+                        this.contentDescription = SemanticsDescription.CITY_LIST_LOADING
+                    })
                 }
             }
 
