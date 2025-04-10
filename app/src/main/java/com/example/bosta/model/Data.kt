@@ -1,4 +1,4 @@
-package com.example.bosta
+package com.example.bosta.model
 
 //data class City(
 //    val id: String,
