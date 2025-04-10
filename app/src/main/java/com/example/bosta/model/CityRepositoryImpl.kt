@@ -1,15 +1,5 @@
 package com.example.bosta.model
 
-
-//class CityRepositoryImpl {
-//
-//     val apiService: CityApiService = Retrofit.Builder()
-//        .baseUrl("https://stg-app.bosta.co/api/v2/")
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .build()
-//        .create(CityApiService::class.java)
-//}
-
 import com.example.bosta.model.remote.CityApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -18,16 +8,22 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CityRepositoryImpl : CityRepository {
+@Singleton
+class CityRepositoryImpl @Inject constructor(
+    private val apiService: CityApiService
 
-    private val apiService by lazy {
-        Retrofit.Builder()
-            .baseUrl("https://stg-app.bosta.co/api/v2/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(CityApiService::class.java)
-    }
+): CityRepository {
+
+//    private val apiService by lazy {
+//        Retrofit.Builder()
+//            .baseUrl("https://stg-app.bosta.co/api/v2/")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//            .create(CityApiService::class.java)
+//    }
 
     // Cache for raw API data
     private var _citiesCache = mutableListOf<Data>()

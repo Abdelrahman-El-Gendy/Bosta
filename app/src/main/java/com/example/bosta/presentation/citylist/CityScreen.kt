@@ -32,14 +32,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bosta.model.Data
 import com.example.bosta.model.District
+import com.example.bosta.model.remote.CityScreenState
 import com.example.bosta.ui.theme.BostaTheme
 
 @Composable
-fun CityScreen(viewModel: CityViewModel = viewModel()) {
-    val state by viewModel.state.collectAsState()
+fun CityScreen(
+    viewModel: CityViewModel = hiltViewModel(),
+    state: CityScreenState
+) {
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -54,10 +58,12 @@ fun CityScreen(viewModel: CityViewModel = viewModel()) {
                     CircularProgressIndicator()
                 }
             }
+
             state.error != null -> {
                 // Handle error state
                 Text("Error: ${state.error}")
             }
+
             else -> {
                 var expandedCityId by remember { mutableStateOf<String?>(null) }
 
@@ -67,7 +73,8 @@ fun CityScreen(viewModel: CityViewModel = viewModel()) {
                             city = city,
                             isExpanded = city.cityId == expandedCityId,
                             onHeaderClick = {
-                                expandedCityId = if (city.cityId == expandedCityId) null else city.cityId
+                                expandedCityId =
+                                    if (city.cityId == expandedCityId) null else city.cityId
                             }
                         )
                     }
@@ -137,6 +144,9 @@ fun DistrictItem(district: District) {
 @Composable
 private fun CityScreenPreview() {
     BostaTheme {
-        CityScreen()
+        CityScreen(
+            viewModel = TODO(),
+            state = TODO()
+        )
     }
 }
